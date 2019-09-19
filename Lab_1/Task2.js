@@ -9,7 +9,7 @@ let promise = new Promise(function(resolve,reject){
 }
 )
 promise.then(
-  result => alert(result), // выведет "done!" через одну секунду
-  error => alert(error) // не будет запущена
+  result => alert(result),
+  error => alert(error) 
 );
 }
