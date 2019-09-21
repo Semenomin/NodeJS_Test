@@ -7,9 +7,7 @@ let promise = new Promise(function(resolve,reject){
     script.onerror = () => reject(new Error("Error Message"));
     document.head.append(script);  
 }
-)
-promise.then(
-  result => alert(result),
-  error => alert(error) 
+).then(result => alert(result),
+       error => alert(error) 
 );
 }
