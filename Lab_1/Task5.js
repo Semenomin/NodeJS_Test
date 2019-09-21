@@ -5,5 +5,5 @@ async function loadTask5()
         setTimeout(()=>resolve(++n),4000);
     })
     let result = await promise;
-    
+    alert(result);
 }

@@ -3,10 +3,10 @@ function Task4(callback){
         let src = 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js';
         let script = document.createElement('script');
         script.src = src;
-        script.Onload = () => resolve("done");
+        script.onload = () => resolve("done");
         script.onerror = () => reject(new Error("Error 404"));
         document.head.append(script);  
-    }).then(error => callback(error),result=> callback(result))
+    }).then(result=> callback(result),error => callback(error))
 }
 function loadTask4(){
     Task4(function(message){
