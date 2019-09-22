@@ -1,5 +1,5 @@
 function loadTask1(){
-  async function doLabs(subject, callback) {
+  function doLabs(subject, callback) {
     alert(`Starting doing ${subject} labs`);
     callback();
   } 
