@@ -1,42 +1,73 @@
 let path = require('path');
 let fs = require('fs');
+let readline = require('readline');
 let files=[];
+let sortedFiles=[];
+
+
 
 function IsFile(fileName){
    return fs.statSync(fileName).isFile();
 }
 
-function sortByBirthTime(files)
-{
-    let map = new Map();
-    for(let file in files){
-        map.set(fs.statSync(file).birthtime,file);
+function sortByBirthTime(files,maxFile){
+    let listOfBirthtimes = [];
+    for(let file of files){
+        listOfBirthtimes.unshift(fs.statSync(file).birthtimeMs);
     }
-    for(let file in map.keys()){
-        console.log(file);
+    listOfBirthtimes.sort();
+    listOfBirthtimes.reverse();
+    let maxBirthFile = listOfBirthtimes[0];
+    for(let birth of listOfBirthtimes){
+        if (maxBirthFile-birth > 10000){    
+            listOfBirthtimes.indexOf(birth);
+            for(let i=0;i<(listOfBirthtimes.length-listOfBirthtimes.indexOf(birth)-1);i++){
+                listOfBirthtimes.pop();
+            }
+        }
+    }
+    for(let file of files){
+        for(let birth of listOfBirthtimes){
+            if(birth == fs.statSync(file).birthtimeMs)
+            {
+                sortedFiles.unshift(file);
+                break;
+            }
+        }
+    }   
+    if(sortedFiles.length > maxFile){
+        for(let i = 0;i<sortedFiles.length-maxFile+1;i++){
+            sortedFiles.pop();
+        }
     }
 }
 
-function getFiles (fileExtension ,dirPath ,maxFile ,maxDir){
+function getFiles (fileExtension ,dirPath,maxDir){
 try{
     let read = fs.readdirSync(dirPath);
     for(let paths of read){
         if(IsFile(path.join(dirPath,paths))){
-            if(paths.indexOf(fileExtension)>=0){
-                files.push(path.resolve(paths));
+            if(path.extname(paths)==fileExtension){
+                files.push(path.join(dirPath,paths));
             }
             else{
                 //console.log(`No Files *${fileExtension} in directory ${path.join(dirPath,paths)}`)
             }
         }
         else{
-            getFiles(fileExtension,path.join(dirPath,paths),1,1);
+            if(maxDir!=0){
+                getFiles(fileExtension,path.join(dirPath,paths),maxDir-1);
+            }
         }
     }
 }
-catch(err)
-{
+catch(err){
     console.log(err);
 }
 }
-getFiles(".js","D:/Git/",1,1);
+function mainFunc(fileExtension ,dirPath ,maxFile = Infinity ,maxDir = Infinity){
+    getFiles(fileExtension ,dirPath ,maxDir);
+    sortByBirthTime(files,maxFile);
+    console.log(sortedFiles);
+}
+mainFunc(".js","D:/Git/");
