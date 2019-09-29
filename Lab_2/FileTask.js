@@ -4,7 +4,10 @@ let readline = require('readline');
 let files=[];
 let sortedFiles=[];
 
-
+var rl = readline.createInterface({
+input: process.stdin,
+output: process.stdout
+});
 
 function IsFile(fileName){
    return fs.statSync(fileName).isFile();
@@ -19,7 +22,7 @@ function sortByBirthTime(files,maxFile){
     listOfBirthtimes.reverse();
     let maxBirthFile = listOfBirthtimes[0];
     for(let birth of listOfBirthtimes){
-        if (maxBirthFile-birth > 10000){    
+        if (maxBirthFile-birth > 10000){
             listOfBirthtimes.indexOf(birth);
             for(let i=0;i<(listOfBirthtimes.length-listOfBirthtimes.indexOf(birth)-1);i++){
                 listOfBirthtimes.pop();
@@ -34,7 +37,7 @@ function sortByBirthTime(files,maxFile){
                 break;
             }
         }
-    }   
+    }
     if(sortedFiles.length > maxFile){
         for(let i = 0;i<sortedFiles.length-maxFile+1;i++){
             sortedFiles.pop();
@@ -70,4 +73,13 @@ function mainFunc(fileExtension ,dirPath ,maxFile = Infinity ,maxDir = Infinity)
     sortByBirthTime(files,maxFile);
     console.log(sortedFiles);
 }
-mainFunc(".js","D:/Git/");
+rl.question("Введите данные в порядке (fileExtension,dirPath,maxFile,maxDir) через запятую, если хотите взять функцию из программы введите 0\n", function(answer) {
+  if (answer == "0"){
+    mainFunc(".js","C:/Users/Alina/Documents/GitHub");
+  }
+  else{
+    let array = answer.split(',');
+    mainFunc(array[0],array[1],array[2],array[3]);
+  };
+  rl.close();
+  });
