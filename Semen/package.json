@@ -1,0 +1,17 @@
+{
+  "name": "Semen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^3.5.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "chromedriver": "^77.0.0"
+  }
+}
