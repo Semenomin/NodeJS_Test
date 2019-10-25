@@ -1,52 +1,63 @@
-let webdriver = require('selenium-webdriver');
+const { Builder, By, Key, until } = require('selenium-webdriver');
+const Config = require('../resourses.js');
+const SearchPage = require('../Modules/searchPage.js');
+const SearchResPage = require('../Modules/searchResultsPage.js');
+require('jasmine');
+require('chromedriver');
+require('geckodriver');
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
+
 let driver;
-describe("task", function() {
+let browser = "chrome";
+driver = new Builder().forBrowser(browser).build();
 
-  beforeAll(function (done) {
-    driver = new webdriver.Builder().usingServer().withCapabilities({'browserName': 'chrome' }).build();
-    driver.get('https://www.google.com');
-    driver.findElement(webdriver.By.name('q')).sendKeys('iTechArt\n').then(done);
-  },10000);
+if (process.argv[2] !== undefined){
+  browser = process.argv[2].slice(process.argv[2].indexOf('=')+1);
+}
 
-  it("Check Num Of Results",async function(){
-    let numOfResults = await driver.findElement(webdriver.By.xpath('//*[@id="resultStats"]'));
-    let text = await numOfResults.getText();
-    let numRes = await text.slice(0,text.indexOf('('));
-    let timeRes = await text.slice(text.indexOf('('));
-    expect(+numRes.replace(/\D+/g,"")).toBeGreaterThan(1000);
-  },10000);
+describe("Google Search test", function() {
 
-  it("Check URL",async function(){
-    let numOfResults = await driver.findElements(webdriver.By.xpath('//cite'));
-    for(let result of numOfResults)
-    {
-      let text = await result.getText();
-      expect(text.toString().toLowerCase().includes("itechart")).toBe(true);
-    }
-  },10000);
-
-  it("Check Label",async function(){
-    let numOfResults = await driver.findElements(webdriver.By.className('LC20lb'));
-    for(let result of numOfResults)
-    {
-      let text = await result.getText();
-      expect(text.toString().toLowerCase().includes("itechart")).toBe(true);
-    }
-  },10000);
-
-  it("Check Label",async function(){
-    let numOfResults = await driver.findElements(webdriver.By.className('st'));
-    for(let result of numOfResults)
-    {
-      let text = await result.getText();
-      expect(text.toString().toLowerCase().includes("itechart")).toBe(true);
-    }
-  },10000);
-
-  afterAll(function () {
-    driver.quit();
+  beforeAll(async function (done) {
+    await SearchPage.setDriver(driver);
+    await SearchPage.open();
+    await SearchPage.writeSearch('iTechArt\n');
+    driver = await SearchPage.getDriver();
+    await done();
   });
+
+  afterAll(async function(){
+    console.log(await SearchResPage.getNumOfResults());
+    console.log(await SearchResPage.getTimeOfSearching());
+    await driver.quit();
   });
+
+  it("Check Text page 1", async function (done) {
+    await SearchResPage.setDriver(driver);
+    let res = await SearchResPage.getblock();
+    for(let result of res){
+      let text = await result.getText();
+      expect(text.toLowerCase()).toContain(`${Config.searchString.toLowerCase()}`);
+    }
+    done();
+  });
+
+  it("Check Text page 2", async function (done) {
+    await SearchResPage.goNextPage();
+    let res = await SearchResPage.getblock();
+    for(let result of res){
+      let text = await result.getText();
+      expect(text.toLowerCase()).toContain(`${Config.searchString.toLowerCase()}`);
+    }
+    done();
+  });
+
+  it("Check Num Of Results",async function(done){
+    let numRes = await SearchResPage.getNumOfResults();
+    expect(+numRes.replace(/\D+/g,"")).toBeGreaterThan(Config.numOfResults);
+    done();
+  });
+});
 
 
 
