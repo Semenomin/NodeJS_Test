@@ -1,0 +1,23 @@
+{
+    "appenders": {
+      "emergencies":
+      {
+        "type": "file",
+        "filename": "logs/app.log",
+        "maxLogSize": 10485760,
+        "numBackups": 3,
+        "flags" : "w"
+      },
+      "console": {
+        "type": "console"
+      },
+      "out": {
+        "type": "logLevelFilter",
+        "appender": "console",
+        "level": "debug"
+      }
+    },
+    "categories": {
+      "default": { "appenders": ["out","emergencies"], "level": "all" }
+    }
+  }
