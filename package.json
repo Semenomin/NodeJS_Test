@@ -1,0 +1,24 @@
+{
+  "name": "automation_pilik_8_1",
+  "version": "1.0.0",
+  "description": "3 курс 8 группа 1 подгруппа",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Semenomin/automation_pilik_8_1.git"
+  },
+  "author": "Semen",
+  "license": "ISC",
+  "homepage": "https://github.com/Semenomin/automation_pilik_8_1#readme",
+  "dependencies": {
+    "chromedriver": "^78.0.1",
+    "googleapis": "^39.2.0",
+    "jasmine": "^3.5.0",
+    "jasmine-allure-reporter": "^1.0.2",
+    "log4js": "^6.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  }
+}
