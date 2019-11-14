@@ -2,9 +2,9 @@
   "name": "automation_pilik_8_1",
   "version": "1.0.0",
   "description": "3 курс 8 группа 1 подгруппа",
-  "main": "index.js",
+  "main": "spec/code/gmailAPI.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
