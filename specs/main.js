@@ -1,5 +1,15 @@
-it('can handle commands using async/await', async function () {
-    const inputElement = await $('#input')
-    let value = await inputElement.getValue()
-    console.log(value) // outputs: some value
-})
+let webdriverio = require('webdriverio');
+describe("app Test",()=>{
+    beforeAll(async () => {
+        var Selector = 'android=new UiSelector().resourceId("Login Logo")';
+        browser.waitForVisible(Selector);
+        browser
+            .element(Selector)
+            .click()
+            .click()
+            .click()
+            .click()
+            .click()
+            .pause(5000);
+    });
+});

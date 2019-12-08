@@ -4,7 +4,7 @@
   "description": "3 курс 8 группа 1 подгруппа",
   "main": "index.js",
   "scripts": {
-    "test": "wdio wdio.conf.js"
+    "test": "./node_modules/.bin/wdio wdio.conf.js"
   },
   "repository": {
     "type": "git",

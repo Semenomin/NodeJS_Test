@@ -18,7 +18,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './specs'
+        './specs/main.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -46,15 +46,13 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [
-        {
-            platformName: 'Android',
-            platformVersion: 9,
-            deviceName: 'Android Emulator',
-            app: 'E:/app-release.apk',
-            automationName: 'UiAutomator2'
-        }
-    ],
+    capabilities: [{
+        app: "E://app.apk",
+        platformName: "Android",
+        platformVersion: "9",
+        deviceName: "Android Emulator",
+        automationName: "UiAutomator2"
+    }],
     //
     // ===================
     // Test Configurations
@@ -107,7 +105,7 @@ exports.config = {
     // Appium Service config
     // see details: https://webdriver.io/docs/appium-service.html
     appium: {
-        command: 'appium',
+        command: 'appium.cmd',
     },
     //
     // Framework you want to run your specs with.
@@ -125,7 +123,7 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     reporters: [['allure', {outputDir: 'allure-results'}]],
-
+ 
     //
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
@@ -136,11 +134,11 @@ exports.config = {
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
         // an assertion fails.
-        expectationResultHandler: function (passed, assertion) {
+        expectationResultHandler: function(passed, assertion) {
             // do something
         }
     },
-
+    
     //
     // =====
     // Hooks
@@ -206,7 +204,7 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: function (test, context, {error, result, duration, passed, retries}) {
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
             browser.takeScreenshot();
         }
@@ -256,10 +254,10 @@ exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-     * Gets executed when a refresh happens.
-     * @param {String} oldSessionId session ID of the old session
-     * @param {String} newSessionId session ID of the new session
-     */
+    * Gets executed when a refresh happens.
+    * @param {String} oldSessionId session ID of the old session
+    * @param {String} newSessionId session ID of the new session
+    */
     //onReload: function(oldSessionId, newSessionId) {
     //}
 }
