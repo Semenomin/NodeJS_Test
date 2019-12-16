@@ -1,37 +1,27 @@
 {
-  "name": "Test",
+  "name": "test",
   "version": "1.0.0",
   "description": "3 курс 8 группа 1 подгруппа",
   "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "chromedriver": "^78.0.1",
+    "jasmine": "^3.5.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "webdriver": "^5.16.13"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "./node_modules/.bin/wdio wdio.conf.js"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Semenomin/automation_pilik_8_1.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Pilik Semen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Semenomin/automation_pilik_8_1/issues"
   },
-  "homepage": "https://github.com/Semenomin/automation_pilik_8_1#readme",
-  "devDependencies": {
-    "@wdio/allure-reporter": "^5.16.10",
-    "@wdio/appium-service": "^5.16.10",
-    "@wdio/cli": "^5.16.10",
-    "@wdio/jasmine-framework": "^5.16.10",
-    "@wdio/local-runner": "^5.16.10",
-    "@wdio/mocha-framework": "^5.16.10",
-    "@wdio/spec-reporter": "^5.16.5",
-    "@wdio/sync": "^5.16.10",
-    "appium": "^1.15.1",
-    "chromedriver": "^78.0.1",
-    "wdio-chromedriver-service": "^5.0.2"
-  },
-  "dependencies": {
-    "wd": "^1.11.4",
-    "jasmine": "latest"
-  }
+  "homepage": "https://github.com/Semenomin/automation_pilik_8_1#readme"
 }
