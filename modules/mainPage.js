@@ -1,7 +1,7 @@
 const Page = require('./Page');
-const { Builder, By, until} = require('selenium-webdriver');
-const webdriver = require('selenium-webdriver');
-const jasmine = require('jasmine');
+const { By, until } = require('selenium-webdriver');
+require('selenium-webdriver');
+require('jasmine');
 let driver;
 
 class MainSteamPage extends Page {
@@ -15,17 +15,16 @@ class MainSteamPage extends Page {
     }
 
     open() {
-        super.open("https://store.steampowered.com/",driver);
+        super.open("https://store.steampowered.com/", driver);
     }
 
     async goMenuItem(item){
-        let Button = await driver.wait (
-            until.elementLocated(webdriver.By.linkText(
-                item)),
-            30000
+        let elem = await driver.wait (
+            until.elementLocated(By.id('genre_tab')),
+            10000
         );
-
-        await Button.click();
+        await driver.actions({bridge: true}).move({duration:10,origin:elem,x:0,y:0}).perform();
+        await driver.findElement(By.linkText(item)).click();
     }
 }
 module.exports = new MainSteamPage();

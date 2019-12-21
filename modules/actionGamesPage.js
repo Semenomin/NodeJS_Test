@@ -3,6 +3,7 @@ const { Builder, By, until} = require('selenium-webdriver');
 const webdriver = require('selenium-webdriver');
 const jasmine = require('jasmine');
 let driver;
+let index = 1;
 
 class ActionGamesPage extends Page {
 
@@ -14,24 +15,40 @@ class ActionGamesPage extends Page {
         return driver;
     }
 
+    goNewReleases(){
+        driver.wait (
+            until.elementLocated(By.id(`tab_select_NewReleases`)),
+            10000
+        ).click();
+    }
+
     async findMaxDiscount(){
         let min = 0;
         let minDiscount;
-        let discounts = await driver.findElements(By.xpath('//div[@id="tab_content_NewReleases"]//div[@class=\'discount_pct\']'));
+        let discounts = await driver.wait (
+            until.elementsLocated(By.xpath('//div[@id="tab_content_NewReleases"]//div[@class=\'discount_pct\']')),
+            10000
+        );
         if(discounts === null){
             return null
         }
-
-        for(let discount of discounts)
+        let i=0;
+        for(let discount of await discounts)
         {
+            i++;
             let text = await discount.getText();
-            text = text.slice(0,3);
+            text = await text.slice(0,3);
             if(min > +text){
+                index=i;
                 min = +text;
                 minDiscount = discount;
             }
         }
         return minDiscount;
+    }
+
+    getPrice(){
+        return driver.findElement(By.xpath(`(//div[@id="tab_content_NewReleases"]//div[@class='discount_pct']/..//div[@class='discount_final_price'])[${index}]`)).getText();
     }
 
     async findMaxPrice(){
