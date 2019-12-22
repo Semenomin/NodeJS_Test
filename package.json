@@ -31,7 +31,8 @@
     "wdio-chromedriver-service": "^5.0.2"
   },
   "dependencies": {
-    "wd": "^1.11.4",
-    "jasmine": "latest"
+    "jasmine": "latest",
+    "log4js": "^6.1.0",
+    "webdriverio": "latest"
   }
 }
