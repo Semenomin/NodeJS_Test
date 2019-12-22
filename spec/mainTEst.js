@@ -1,10 +1,10 @@
 const { Builder } = require('selenium-webdriver');
 const webdriver = require('selenium-webdriver');
-const mainSteamPage= require('../Modules/mainPage.js');
-const actionGamesPage = require('../modules/actionGamesPage.js');
-const gamePage = require('../modules/gamePage.js');
+const mainSteamPage= require('../modules/mainSteamPage.js');
+const actionGamesPage = require('../modules/listGamesPage.js');
+const gamePage = require('../modules/oneGameSteamPage.js');
 const steamPage = require('../modules/downloadSteamPage.js');
-const birthdayPage = require('../modules/birthdayPage.js');
+const birthdayPage = require('../modules/checkBirthdayPage.js');
 const config = require('../config.js');
 require('jasmine');
 

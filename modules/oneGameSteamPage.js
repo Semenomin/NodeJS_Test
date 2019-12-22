@@ -4,7 +4,7 @@ const webdriver = require('selenium-webdriver');
 const jasmine = require('jasmine');
 let driver;
 
-class GamePage extends Page {
+class OneGameSteamPage extends Page {
     setDriver(value) {
         driver = value;
     }
@@ -42,4 +42,4 @@ class GamePage extends Page {
         Button.click();
     }
 }
-module.exports = new GamePage();
+module.exports = new OneGameSteamPage();

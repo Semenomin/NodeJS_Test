@@ -5,7 +5,7 @@ const jasmine = require('jasmine');
 let driver;
 let index = 1;
 
-class ActionGamesPage extends Page {
+class ListGamesPage extends Page {
 
     setDriver(value) {
         driver = value;
@@ -70,4 +70,4 @@ class ActionGamesPage extends Page {
         return maxPrice
     }
 }
-module.exports = new ActionGamesPage();
+module.exports = new ListGamesPage();

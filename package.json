@@ -8,7 +8,9 @@
     "chromedriver": "^78.0.1",
     "jasmine": "^3.5.0",
     "selenium-webdriver": "^4.0.0-alpha.5",
-    "webdriver": "^5.16.13"
+    "webdriver": "^5.16.13",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   },
   "devDependencies": {},
   "scripts": {

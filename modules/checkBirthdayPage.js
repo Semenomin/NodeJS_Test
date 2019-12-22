@@ -5,7 +5,7 @@ const jasmine = require('jasmine');
 const config = require('../config.js');
 let driver;
 
-class BirthdayPage extends Page {
+class CheckBirthdayPage extends Page {
 
     setDriver(value) {
         driver = value;
@@ -30,4 +30,4 @@ class BirthdayPage extends Page {
         await driver.findElement(By.xpath('//*[@class=\'btnv6_blue_hoverfade btn_medium\'][@onclick=\'ViewProductPage()\']')).click();
     }
 }
-module.exports = new BirthdayPage();
+module.exports = new CheckBirthdayPage();
