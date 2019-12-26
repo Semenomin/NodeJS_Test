@@ -2,7 +2,7 @@ const Page = require('./Page');
 const { By, until} = require('selenium-webdriver');
 let driver;
 
-const discount = '//div[@class="game_purchase_action_bg"]//div[@class=\'discount_pct\']';
+const discount_str = '//div[@class="game_purchase_action_bg"]//div[@class=\'discount_pct\']';
 const final_price = '(//div[@class=\'game_purchase_action_bg\']//div[@class=\'discount_final_price\'])[1]';
 const price = '(//*[@class=\'game_purchase_price price\'])[1]';
 const intall_steam_btn = 'header_installsteam_btn';
@@ -18,7 +18,7 @@ class OneGameSteamPage extends Page {
 
     async getDiscount(){
         let discount = await driver.wait (
-            until.elementLocated(By.xpath(discount)),
+            until.elementLocated(By.xpath(discount_str)),
             10000
         );
         return await discount.getText();

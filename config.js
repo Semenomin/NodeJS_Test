@@ -1,7 +1,7 @@
 const downloadsFolder = require('downloads-folder');
 
 exports.menu = 'Игры';
-exports.menu_item = 'Инди';
+exports.menu_item = 'Экшен';
 exports.birth_day = '9';
 exports.birth_month = 'December';
 exports.birth_year = '1999';
