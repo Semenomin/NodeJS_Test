@@ -1,22 +1,22 @@
 const Page = require('./Page');
-const { Builder, By, until} = require('selenium-webdriver');
-const webdriver = require('selenium-webdriver');
-const jasmine = require('jasmine');
 const config = require('../config.js');
 const fs = require('fs');
 const path = require('path');
+const {until,By} = require('selenium-webdriver');
 let driver;
+
+const download_steam = 'about_install win';
+
 class steamPage extends Page {
     setDriver(value) {
         driver = value;
     }
 
     async downloadSteam(){
-        let Button = await driver.wait (
-            until.elementLocated(webdriver.By.className('about_install win')),
+        await driver.wait (
+            until.elementLocated(By.className(download_steam)),
             20000
         ).click();
-        let now = new Date();
     }
 
     async waitDownload(){

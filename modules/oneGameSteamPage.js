@@ -1,8 +1,11 @@
 const Page = require('./Page');
-const { Builder, By, until} = require('selenium-webdriver');
-const webdriver = require('selenium-webdriver');
-const jasmine = require('jasmine');
+const { By, until} = require('selenium-webdriver');
 let driver;
+
+const discount = '//div[@class="game_purchase_action_bg"]//div[@class=\'discount_pct\']';
+const final_price = '(//div[@class=\'game_purchase_action_bg\']//div[@class=\'discount_final_price\'])[1]';
+const price = '(//*[@class=\'game_purchase_price price\'])[1]';
+const intall_steam_btn = 'header_installsteam_btn';
 
 class OneGameSteamPage extends Page {
     setDriver(value) {
@@ -15,20 +18,20 @@ class OneGameSteamPage extends Page {
 
     async getDiscount(){
         let discount = await driver.wait (
-            until.elementLocated(By.xpath('//div[@class="game_purchase_action_bg"]//div[@class=\'discount_pct\']')),
+            until.elementLocated(By.xpath(discount)),
             10000
         );
         return await discount.getText();
     }
 
     async getFinalPrice(){
-        let price = await driver.findElement(By.xpath('(//div[@class=\'game_purchase_action_bg\']//div[@class=\'discount_final_price\'])[1]'));
+        let price = await driver.findElement(By.xpath(final_price));
         return await price.getText();
     }
 
     async getPrice(){
         let price = await driver.wait (
-            until.elementLocated(By.xpath('(//*[@class=\'game_purchase_price price\'])[1]')),
+            until.elementLocated(By.xpath(price)),
             10000
         );
         return await price.getText();
@@ -36,7 +39,7 @@ class OneGameSteamPage extends Page {
 
     async goSteamInstall(){
         let Button = await driver.wait(
-            until.elementLocated(webdriver.By.className('header_installsteam_btn')),
+            until.elementLocated(By.className(intall_steam_btn)),
             20000
         );
         Button.click();

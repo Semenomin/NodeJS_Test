@@ -28,7 +28,8 @@ describe("Steam test", function() {
     beforeAll(async function () {
         await mainSteamPage.setDriver(driver);
         await mainSteamPage.open();
-        await mainSteamPage.goMenuItem(config.game_genre);
+        await mainSteamPage.goMenu(config.menu);
+        await mainSteamPage.goMenuItem(config.menu_item);
         driver = await mainSteamPage.getDriver();
     });
 
